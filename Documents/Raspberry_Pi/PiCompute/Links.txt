@@ -18,3 +18,6 @@ https://github.com/ShawnHymel/rpi-cm4-base-carrier
 Altium Project
 https://github.com/QWaveSystems/QWAVE_Raspberry-Pi-CM4-Altium-Library
 https://grabcad.com/library/raspberry-pi-cm4-usb-flasher-1
+
+grabcad carrier board
+https://grabcad.com/library/raspberry-pi-compute-module-4-io-board-1
