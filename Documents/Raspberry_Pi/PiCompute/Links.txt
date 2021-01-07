@@ -1,0 +1,20 @@
+PiCompute
+https://www.raspberrypi.org/products/compute-module-4/?variant=raspberry-pi-cm4001000
+
+Official carrier Board
+https://www.raspberrypi.org/products/compute-module-4-io-board/
+
+Eagle Minimal carrier
+https://hackaday.io/project/175832-minimal-raspberry-pi-cm-4-carrier
+https://github.com/timonsku/Minimal-RPi-CM-4-Carrier
+
+Eagle footprint:
+https://github.com/shridattdudhat/Raspberry-Pi-Compute-Module-4-Eagle-Footprint
+
+Digikey tutorial kicad
+https://www.digikey.co.il/en/maker/projects/creating-a-raspberry-pi-compute-module-4-cm4-carrier-board-in-kicad/7812da347e5e409aa28d59ea2aaea490
+https://github.com/ShawnHymel/rpi-cm4-base-carrier
+
+Altium Project
+https://github.com/QWaveSystems/QWAVE_Raspberry-Pi-CM4-Altium-Library
+https://grabcad.com/library/raspberry-pi-cm4-usb-flasher-1
