@@ -8,6 +8,10 @@ Eagle Minimal carrier
 https://hackaday.io/project/175832-minimal-raspberry-pi-cm-4-carrier
 https://github.com/timonsku/Minimal-RPi-CM-4-Carrier
 
+Eagle Minimal Carrier Tindie:
+https://github.com/dronecz/Minimal_carrier_board_for_CM4
+https://www.tindie.com/products/dronecz/minimal-carrier-board-for-compute-module-4/
+
 Eagle footprint:
 https://github.com/shridattdudhat/Raspberry-Pi-Compute-Module-4-Eagle-Footprint
 
