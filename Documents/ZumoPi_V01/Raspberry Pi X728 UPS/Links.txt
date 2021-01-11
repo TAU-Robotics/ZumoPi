@@ -1,0 +1,6 @@
+https://geekworm.com/
+Raspberry Pi X728 (Max 5.1V 8A) 18650 UPS & Power Management Board with AC Power Loss Detection, Auto On & Safe Shutdown Function
+https://geekworm.com/collections/raspberry-pi/products/raspberry-pi-x728-max-5-1v-8a-18650-ups-power-management-board?variant=32690495488088
+http://raspberrypiwiki.com/X728#User_manual
+http://raspberrypiwiki.com/X728-Software
+http://raspberrypiwiki.com/X728-hardware
