@@ -5,3 +5,5 @@ I2C1 GPIO2, GPIO3
 GPIO13 Button ?
 GPIO12 Boot
 GPIO5 Shutdown
+
+GPIO26 MCUReset 

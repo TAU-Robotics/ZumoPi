@@ -1,0 +1,41 @@
+# VSCode ssh
+https://code.visualstudio.com/docs/remote/ssh
+# general tutorial
+https://joachimweise.github.io/post/2020-04-07-vscode-remote/
+# add users
+https://www.raspberrypi.org/documentation/linux/usage/users.md
+# ssh keys tutorial:
+https://code.visualstudio.com/docs/remote/ssh-tutorial
+
+#install snap curl:
+https://snapcraft.io/install/curl-ijohnson/raspbian
+
+#install arduino - using arduino command line interface (cli)
+https://create.arduino.cc/projecthub/techno_z/program-your-arduino-from-your-raspberry-pi-3407d4
+https://arduino.github.io/arduino-cli/latest/installation/
+
+#install VSCode extensions: Remote - Development
+#install VSCode extensions: python, cpp , arduino 
+
+Create user:
+user: zumo
+pass: pi
+
+sudo adduser zumo
+
+# add it to sudo group
+sudo adduser zumo sudo
+
+#delete user
+sudo userdel -r zumo
+
+#switch user
+sudo su zumo
+
+#create a .ssh folder in /home/zumo
+mkdir ~/.ssh
+
+#create an ssh key:
+ssh-keygen -t rsa -b 2048
+
+#enable vnc on pi
