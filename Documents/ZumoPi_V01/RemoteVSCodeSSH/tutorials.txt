@@ -14,6 +14,9 @@ https://snapcraft.io/install/curl-ijohnson/raspbian
 https://create.arduino.cc/projecthub/techno_z/program-your-arduino-from-your-raspberry-pi-3407d4
 https://arduino.github.io/arduino-cli/latest/installation/
 
+#working with arduino cli
+https://siytek.com/arduino-cli-raspberry-pi/
+
 #install VSCode extensions: Remote - Development
 #install VSCode extensions: python, cpp , arduino 
 
