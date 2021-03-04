@@ -16,6 +16,7 @@ https://arduino.github.io/arduino-cli/latest/installation/
 
 #working with arduino cli
 https://siytek.com/arduino-cli-raspberry-pi/
+https://arduino.github.io/arduino-cli/latest/command-line-completion/
 
 #install VSCode extensions: Remote - Development
 #install VSCode extensions: python, cpp , arduino 
