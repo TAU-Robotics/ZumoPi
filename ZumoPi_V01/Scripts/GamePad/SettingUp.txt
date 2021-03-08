@@ -1,0 +1,4 @@
+https://core-electronics.com.au/tutorials/using-usb-and-bluetooth-controllers-with-python.html
+https://askubuntu.com/questions/166420/how-to-detect-an-usb-device
+https://linux.die.net/man/8/udevadm
+

@@ -4,6 +4,9 @@ https://code.visualstudio.com/docs/remote/ssh
 https://joachimweise.github.io/post/2020-04-07-vscode-remote/
 # add users
 https://www.raspberrypi.org/documentation/linux/usage/users.md
+# working with groups
+https://desertbot.io/blog/raspberry-pi-add-new-group
+
 # ssh keys tutorial:
 https://code.visualstudio.com/docs/remote/ssh-tutorial
 
