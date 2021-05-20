@@ -40,7 +40,7 @@ void loop() {
   }
   // print the string when a newline arrives:
   if (stringComplete) {
-    Serial.print(inputString);
+    //Serial.print(inputString);
 
     int ind1 = inputString.indexOf(',');  //finds location of first ,
     String str = inputString.substring(0, ind1);   //captures first data String
@@ -49,11 +49,15 @@ void loop() {
     str = inputString.substring(ind1+1);   //captures first data String
     int joyY = str.toInt();
     
-    int leftMotor = joyY + joyX;
-    int rightMotor = joyY - joyX;
+    int leftMotor = joyY + int(float(joyX)/1.5);
+    int rightMotor = joyY - int(float(joyX)/1.5);
+    uint16_t batteryLevel = readBatteryMillivolts();
+    float battery = float(batteryLevel)/1000.0;
     Serial.print(leftMotor);
     Serial.print(" , ");
-    Serial.println(rightMotor);
+    Serial.print(rightMotor);
+    Serial.print(" , ");
+    Serial.println(battery);
     motors.setLeftSpeed(leftMotor);
     motors.setRightSpeed(rightMotor);
     // clear the string:
