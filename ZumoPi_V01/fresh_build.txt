@@ -1,0 +1,7 @@
+Install rasbian using pi imager
+install arduino arm 32
+add zumo libraries
+install arduino-cli : https://siytek.com/arduino-cli-raspberry-pi/
+
+add to /home/pi/bin PATH:
+export PATH=$PATH:/home/pi/bin
