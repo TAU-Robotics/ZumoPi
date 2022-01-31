@@ -1,7 +1,28 @@
 Install rasbian using pi imager
 install arduino arm 32
-add zumo libraries
-install arduino-cli : https://siytek.com/arduino-cli-raspberry-pi/
+add zumo libraries 	https://www.pololu.com/docs/0J63/5.2
+install arduino-cli  	https://siytek.com/arduino-cli-raspberry-pi/
 
-add to /home/pi/bin PATH:
-export PATH=$PATH:/home/pi/bin
+setup arduino cores:
+arduino-cli core install arduino:avr
+
+work with virtualenv:
+virtualenv -p python3 venv_test
+
+python packages:
+pip3 install dash
+pip3 install evdev
+pip3 install pyserial
+pip3 install dash-daq
+
+Sertup pi UPS: https://wiki.geekworm.com/X728
+git clone https://github.com/geekworm-com/x728
+cd x728
+chmod +x *.sh
+sudo bash x728-v1.0.sh
+
+
+
+
+
+
