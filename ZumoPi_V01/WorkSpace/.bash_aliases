@@ -1,9 +1,6 @@
 # shut down ups
 alias x728off='sudo x728softsd.sh'
 
-# measure temperature
-alias temp_mcu='/opt/vc/bin/vcgencmd measure_temp'
-
 #arduino cli
 alias compileuno="arduino-cli compile --fqbn arduino:avr:uno"
 alias uploaduno="arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno"
@@ -13,3 +10,4 @@ alias uploadzumo="arduino-cli upload -p /dev/ttyACM0 --fqbn pololu-a-star:avr:a-
 alias zumoPower="python x728bat.py"
 alias zumoRemote="python3 /home/pi/WS_Zumo/Arduino/TeleOperate/KeyboardTeleoperate.py"
 alias zumoCamera="python3 /home/pi/WS_Zumo/PiCamera/CameraStream.py"
+alias zumoJoystick="python3 /home/pi/WS_Zumo/DashControl/myJoystick.py"

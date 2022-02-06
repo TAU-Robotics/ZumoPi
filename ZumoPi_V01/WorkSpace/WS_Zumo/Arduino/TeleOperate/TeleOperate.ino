@@ -49,8 +49,8 @@ void loop() {
     str = inputString.substring(ind1+1);   //captures first data String
     int joyY = str.toInt();
     
-    int leftMotor = joyY + int(float(joyX)/1.5);
-    int rightMotor = joyY - int(float(joyX)/1.5);
+    int leftMotor = joyY + joyX;  //int(float(joyX)/1.5);
+    int rightMotor = joyY - joyX; //int(float(joyX)/1.5);
     uint16_t batteryLevel = readBatteryMillivolts();
     float battery = float(batteryLevel)/1000.0;
     Serial.print(leftMotor);

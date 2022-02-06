@@ -7,7 +7,8 @@ import math
 #dash imports
 import dash
 import dash_daq as daq
-import dash_html_components as html
+#import dash_html_components as html
+from dash import html
 import logging
 
 external_stylesheets = ['pydash\templates\bWLwgP.css']
