@@ -1,0 +1,39 @@
+ROS2 Foxy Ubuntu 20.04
+
+Stting up enviroment:
+
+Basic Packages:
+$ sudo apt install build-essential gcc make perl dkms
+
+Tools: Terminator VSCode
+$ sudo apt install terminator
+$ sudo snap install --classic code
+
+VSCode Extensions:
+C/C++(Microsoft), CMake(twxs), Python(Microsoft)
+
+ROS2 Foxy - https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
+
+additional installs
+$ pip3 install argcomplete
+
+Colcon
+$ sudo apt install python3-colcon-common-extensions 
+
+
+
+Ros2 Workspace
+creat workspace: ros2_ws/src/
+
+build enviromet in ros2_ws and add the enviroment to .bashrc
+~/ros2_ws$ colcon build 
+
+create python package
+
+
+
+
+add to .bashrc
+source /opt/ros/foxy/setup.bash
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash 
+source ~/ros2_ws/install/setup.bash
