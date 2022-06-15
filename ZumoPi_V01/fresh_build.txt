@@ -1,28 +1,29 @@
 Install rasbian using pi imager
+
+install EW-7822ULC/UTC adapter	https://simsalabasim.medium.com/edimax-7822-wifi-usb-dongle-on-raspberry-pi-4-4f839db76e1e
+(install prerequirments from tutorial install using make)
+$ make
+$ sudo make install
+
 install arduino arm 32
 add zumo libraries 	https://www.pololu.com/docs/0J63/5.2
 install arduino-cli  	https://siytek.com/arduino-cli-raspberry-pi/
 
 setup arduino cores:
-arduino-cli core install arduino:avr
+$arduino-cli core install arduino:avr
 
 work with virtualenv:
-virtualenv -p python3 venv_test
+$virtualenv -p python3 venv_test
 
 python packages:
-pip3 install dash
-pip3 install evdev
-pip3 install pyserial
-pip3 install dash-daq
+$pip3 install dash
+$pip3 install evdev
+$pip3 install pyserial
+$pip3 install dash-daq
 
-Sertup pi UPS: https://wiki.geekworm.com/X728
-git clone https://github.com/geekworm-com/x728
-cd x728
-chmod +x *.sh
-sudo bash x728-v1.0.sh
-
-
-
-
-
+Setup pi UPS: https://wiki.geekworm.com/X728
+$git clone https://github.com/geekworm-com/x728
+$cd x728
+$chmod +x *.sh
+$sudo bash x728-v1.0.sh // or latest version present 2.1
 
