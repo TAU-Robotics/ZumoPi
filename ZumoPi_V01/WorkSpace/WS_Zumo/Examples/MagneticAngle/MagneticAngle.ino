@@ -1,5 +1,5 @@
 /*
-  Odometry && Gyro Integration with teleoperate
+  Odometry && Gyro Integration && Magnetic Angle with teleoperate
 */
 #include <Wire.h>
 #include <Zumo32U4.h>
@@ -17,7 +17,7 @@ float dt_time = SAMPLERATE/1000.0;
 
 // message variables
 String inputString = "";      // a String to hold incoming data
-bool stringComplete = false;  // whether the string is complete
+bool stringComplete = true;  // whether the string is complete
 
 // Odometry settings
 #define GEAR_RATIO 51.45      // Motor gear ratio 100.37
@@ -36,6 +36,22 @@ float gyroAngle=0;
 int32_t gyroOffset_z = -16;
 float gyroz=0;
 boolean motorsState = 0;
+
+float magAngle = 0;
+// define if to perform magnetometer calibration
+#define MAG_CALIBRATE false
+// magnetometer calibration variables
+struct {
+ int xMax = -22628; //-21445
+ int xMin = -26413; //-27942
+ int yMax = 19277;  // 20547
+ int yMin = 14575;  // 14575
+ int xOffset = 8247; //8074
+ int yOffset = -15842; // -15207
+ float scaleX = 1892.5; // 3248.5
+ float scaleY = 2351.0; // 2986.0
+} magCal;
+
 // the setup function runs once when you press reset or power the board
 void setup() {
   // init imu
@@ -58,7 +74,7 @@ void setup() {
   lastMicros = micros();
   
   // calculate gyro offset
-  //gyroOffset();
+  gyroOffset();
   
 }
 
@@ -74,11 +90,54 @@ void loop() {
     gyroIntegration();
     // run functions
     odometry();
+    // Magnetometer angle
+    magnetometer();
   }
   // check for iuncoming messages
   msg_handler();
 }
 
+// Magnetometer angle
+void magnetometer(void){
+    imu.read();
+    float magx = ((double)(imu.m.x - magCal.xOffset))/magCal.scaleX;
+    float magy = ((double)(imu.m.y - magCal.yOffset))/magCal.scaleY;
+    magAngle = atan2(magy,magx);
+
+    if (MAG_CALIBRATE){
+        if (imu.m.x > magCal.xMax) magCal.xMax = imu.m.x;
+        if (imu.m.x < magCal.xMin) magCal.xMin = imu.m.x;
+        magCal.xOffset = (magCal.xMax + magCal.xMin)/2;
+        magCal.scaleX = ((float)(magCal.xMax - magCal.xMin))/2;
+        if (imu.m.y > magCal.yMax) magCal.yMax = imu.m.y;
+        if (imu.m.y < magCal.yMin) magCal.yMin = imu.m.y;
+        magCal.yOffset = (magCal.yMax + magCal.yMin)/2;
+        magCal.scaleY = ((float)(magCal.yMax - magCal.yMin))/2;
+    
+
+        Serial.print(imu.m.x);
+        Serial.print(" , ");
+        Serial.print(imu.m.y);
+        Serial.print(" , ");
+        Serial.print(magCal.xMax);
+        Serial.print(" , ");
+        Serial.print(magCal.xMin);
+        Serial.print(" , ");
+        Serial.print(magCal.yMax);
+        Serial.print(" , ");
+        Serial.print(magCal.yMin);
+        Serial.print(" , ");
+        Serial.print(magCal.xOffset);
+        Serial.print(" , ");
+        Serial.print(magCal.yOffset);
+        Serial.print(" , ");
+        Serial.print(magCal.scaleX);
+        Serial.print(" , ");
+        Serial.print(magCal.scaleY);
+        Serial.print(" , ");
+        Serial.println(magAngle*57.295);
+    }
+}
 // gyroIntegration
 void gyroIntegration(void){
   imu.readGyro();
@@ -146,7 +205,7 @@ void parse_msg(void){
     Serial.print(" , ");
     Serial.print(battery);
     Serial.print(" , ");
-    Serial.print(dt_time);
+    Serial.print(dt_time*1000);
     Serial.print(" , ");
     Serial.print(posx);
     Serial.print(" , ");
@@ -154,7 +213,10 @@ void parse_msg(void){
     Serial.print(" , ");
     Serial.print(theta*57.295);
     Serial.print(" , ");
-    Serial.println(gyroAngle);
+    Serial.print(gyroAngle);
+    Serial.print(" , ");
+    Serial.println(magAngle*57.295);
+
 
     motorsState = (leftMotor || rightMotor) ==  0 ? 0 : 1; //  check if motors are still
     // update motors 
