@@ -1,5 +1,5 @@
 /*
-  Odometry with teleoperate
+  Odometry && Gyro Integration with teleoperate
 */
 #include <Wire.h>
 #include <Zumo32U4.h>
@@ -7,6 +7,7 @@
 // zumo classes
 Zumo32U4Encoders encoders;
 Zumo32U4Motors motors;
+Zumo32U4IMU imu;
 
 // time variables
 #define SAMPLERATE 10          // 5 millis =  200 Hz
@@ -23,14 +24,25 @@ bool stringComplete = false;  // whether the string is complete
 #define WHEELS_DISTANCE 98    // Distance between tracks
 #define WHEEL_DIAMETER 37.5   // Wheels diameter measured 38.5
 #define ENCODER_PPR 12        // Encoder pulses per revolution
+#define GYRO_SCALE 0.07        // 70 mdps/LSB 
 float encoder2dist = WHEEL_DIAMETER*3.14/(ENCODER_PPR*GEAR_RATIO);  // conversition of encoder pulses to distance in mm
 
 float theta = 0; 
 float posx = 0;
 float posy = 0;
 
+// imu Fusion
+float gyroAngle=0;
+int32_t gyroOffset_z = -16;
+float gyroz=0;
+boolean motorsState = 0;
 // the setup function runs once when you press reset or power the board
 void setup() {
+  // init imu
+  Wire.begin();
+  imu.init();
+  imu.enableDefault();
+  imu.configureForTurnSensing();
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
   
@@ -44,6 +56,10 @@ void setup() {
   // take time stamp
   lastMillis = millis();
   lastMicros = micros();
+  
+  // calculate gyro offset
+  //gyroOffset();
+  
 }
 
 // the loop function runs over and over again forever
@@ -54,7 +70,8 @@ void loop() {
     unsigned long dtMicros = micros()-lastMicros;
     lastMicros = micros();
     dt_time = float(dtMicros)/1000000.0;
-
+    // read imu, calculate rotation angle
+    gyroIntegration();
     // run functions
     odometry();
   }
@@ -62,7 +79,29 @@ void loop() {
   msg_handler();
 }
 
+// gyroIntegration
+void gyroIntegration(void){
+  imu.readGyro();
+  gyroz = ((float) (imu.g.z - (int16_t)gyroOffset_z))*GYRO_SCALE;
+  if (motorsState) gyroAngle+=(gyroz*dt_time); // integrate when in motion
+}
 
+// gyro calibration
+void gyroOffset(){
+  delay(1); // delay before starting gyro readings for offset
+  int32_t total = 0;
+  for (uint16_t i = 0; i < 1024; i++)
+  {
+    // Wait for new data to be available, then read it.
+    while(!imu.gyroDataReady()) {}
+    imu.readGyro();
+
+    // Add the Z axis reading to the total.
+    total += imu.g.z;
+  }
+  gyroOffset_z = total / 1024;
+  //Serial.println(gyroOffset_z);
+}
 
 // check if there is a message if so parse it and send an update
 void msg_handler(void){
@@ -107,15 +146,19 @@ void parse_msg(void){
     Serial.print(" , ");
     Serial.print(battery);
     Serial.print(" , ");
-    Serial.print(dt_time);
+    Serial.print(dt_time*1000);
     Serial.print(" , ");
     Serial.print(posx);
     Serial.print(" , ");
     Serial.print(posy);
     Serial.print(" , ");
-    Serial.println(theta*57.295);
+    Serial.print(theta*57.295);
+    Serial.print(" , ");
+    Serial.println(gyroAngle);
 
-    // update motors    
+    motorsState = (leftMotor || rightMotor) ==  0 ? 0 : 1; //  check if motors are still
+    // update motors 
+    
     motors.setLeftSpeed(leftMotor);
     motors.setRightSpeed(rightMotor);
     // clear the string:
