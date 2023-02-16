@@ -129,7 +129,8 @@ void odometry(void){
     int16_t countsRight = encoders.getCountsAndResetRight();
     float dx_1 = countsRight*encoder2dist;
     float dx_2 = countsLeft*encoder2dist;
-    posx += sin(theta)*(dx_1+dx_2)/2;
-    posy += cos(theta)*(dx_1+dx_2)/2;
-    theta += float(dx_1-dx_2)/WHEELS_DISTANCE;
+    float d_theta = float(dx_1-dx_2)/WHEELS_DISTANCE;
+    posx += cos(theta+d_theta/2)*(dx_1+dx_2)/2;
+    posy += sin(theta+d_theta/2)*(dx_1+dx_2)/2;
+    theta += d_theta;
 }
